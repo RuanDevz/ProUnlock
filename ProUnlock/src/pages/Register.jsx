@@ -7,12 +7,26 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [message, setMessage] = useState(""); // Para mensagens de sucesso ou erro
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Validações básicas
+    if (!username || !email || !password || !confirmPassword) {
+      setMessage("Por favor, preencha todos os campos!");
+      return;
+    }
+
     if (password !== confirmPassword) {
-      alert("As senhas não coincidem!");
+      setMessage("As senhas não coincidem!");
+      return;
+    }
+
+    // Verificando se o e-mail tem um formato válido
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      setMessage("Por favor, insira um e-mail válido.");
       return;
     }
 
@@ -24,11 +38,10 @@ const Register = () => {
 
     try {
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/register`, data);
-      console.log(response.data);
-      console.log("Success")
-      console.log(import.meta.env.BACKEND_URL)
+      setMessage("Usuário criado com sucesso! Faça login para acessar.");
     } catch (error) {
       console.error("Erro ao registrar usuário:", error);
+      setMessage("Erro ao registrar usuário. Tente novamente mais tarde.");
     }
   };
 
@@ -133,6 +146,12 @@ const Register = () => {
                   </button>
                 </div>
               </form>
+
+              {message && (
+                <p className="mt-4 text-center text-lg font-semibold text-gray-700">
+                  {message}
+                </p>
+              )}
             </div>
           </div>
         </div>

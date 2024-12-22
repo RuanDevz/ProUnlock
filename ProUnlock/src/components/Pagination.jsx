@@ -1,40 +1,48 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Importar hook de navegação
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"; 
 import Netflix from "../assets/Netflix.png";
 import HBO from "../assets/HBO.png";
 import AmazonPrime from "../assets/AmazonPrime.png";
 import Star from "../assets/Star.png";
-import crunchyroll from '../assets/Cruchyroll.png'
-import Banner from "../assets/Banner.png"; // Banner de fundo
+import Crunchyroll from "../assets/Cruchyroll.png";
+import Youtube from "../assets/Youtube.png";
+import Paramount from "../assets/Paramount.png";
+import AppleTV from "../assets/AppleTV.png"; 
+import Banner from "../assets/Banner.png"; 
+import axios from 'axios'
 
-// Serviços com links de acesso
 const services = [
-  { name: "Netflix", logo: Netflix, route: "/netflix" },
-  { name: "HBO", logo: HBO, route: "/hbo" },
-  { name: "AmazonPrime", logo: AmazonPrime, route: "/amazonprime" },
-  { name: "Star+", logo: Star, route: "/starplus" },
-  {name: "Crunchyroll", logo: crunchyroll, route: '/crunchyroll'}
+  { name: "Netflix", logo: Netflix, route: "/streaming/netflix" },
+  { name: "HBO", logo: HBO, route: "/streaming/hbo" },
+  { name: "Amazon Prime", logo: AmazonPrime, route: "/streaming/amazonprime" },
+  { name: "Star+", logo: Star, route: "/streaming/starplus" },
+  { name: "Crunchyroll", logo: Crunchyroll, route: "/streaming/crunchyroll" },
+  { name: "YouTube Premium", logo: Youtube, route: "/streaming/youtube" },
+  { name: "Paramount+", logo: Paramount, route: "/streaming/paramount" },
+  { name: "Apple TV+", logo: AppleTV, route: "/streaming/appletv" }, 
 ];
 
 const Pagination = () => {
-  const [selectedService, setSelectedService] = useState(null);
-  const navigate = useNavigate(); // Usar hook para navegação
+  const navigate = useNavigate(); 
 
   const handleServiceClick = (service) => {
-    // Navegar para a página do serviço
-    setSelectedService(service);
     navigate(service.route);
   };
 
+  useEffect(() =>{
+    axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/streaming/netflix`).then((response) =>{
+      console.log(response.data)
+    })
+  },[])
+
   return (
-    <div className="flex flex-col items-center justify-center bg-gray-700 p-8 font-sans">
+    <div className="flex flex-col items-center justify-center bg-gray-700 p-8 font-sans pb-20">
       <div
         className="flex h-72 w-full items-center justify-center bg-cover bg-center"
         style={{
           backgroundImage: `url(${Banner})`,
         }}
-      >
-      </div>
+      ></div>
 
       <div id="servicos" className="mt-12 w-full max-w-screen-xl px-4">
         <h2 className="mb-8 text-center text-3xl font-bold text-blue-800">
@@ -57,22 +65,6 @@ const Pagination = () => {
           ))}
         </div>
       </div>
-
-      {selectedService && (
-        <div className="mt-12 w-full max-w-md rounded-lg bg-white p-6 text-center shadow-xl">
-          <h2 className="mb-4 text-2xl font-semibold text-gray-800">
-            Acesso para {selectedService.name}
-          </h2>
-          <a
-            href={selectedService.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-lg font-medium text-blue-500 underline transition-colors hover:text-blue-700"
-          >
-            Clique aqui para acessar o {selectedService.name}
-          </a>
-        </div>
-      )}
     </div>
   );
 };
