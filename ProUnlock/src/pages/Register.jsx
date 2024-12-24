@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Input from "../components/Input";
 import axios from "axios";
 
@@ -7,41 +8,51 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [message, setMessage] = useState(""); // Para mensagens de sucesso ou erro
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validações básicas
+    setMessage("");
+    setError("");
+
     if (!username || !email || !password || !confirmPassword) {
-      setMessage("Por favor, preencha todos os campos!");
+      setError("Por favor, preencha todos os campos!");
       return;
     }
 
     if (password !== confirmPassword) {
-      setMessage("As senhas não coincidem!");
+      setError("As senhas não coincidem!");
       return;
     }
 
-    // Verificando se o e-mail tem um formato válido
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email)) {
-      setMessage("Por favor, insira um e-mail válido.");
+      setError("Por favor, insira um e-mail válido.");
       return;
     }
 
-    const data = {
-      username: username,
-      email: email,
-      password: password,
-    };
+    const data = { username, email, password };
 
     try {
+      // Faz a requisição de registro
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/register`, data);
-      setMessage("Usuário criado com sucesso! Faça login para acessar.");
+
+      const { token, user } = response.data;
+
+      // Salva o token e dados do usuário no localStorage
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
+
+      // Redireciona o usuário para o dashboard ou página principal
+      window.location.href = "/";
     } catch (error) {
       console.error("Erro ao registrar usuário:", error);
-      setMessage("Erro ao registrar usuário. Tente novamente mais tarde.");
+      setError(
+        error.response?.data?.error || "Erro ao registrar usuário. Tente novamente."
+      );
     }
   };
 
@@ -49,6 +60,7 @@ const Register = () => {
     <div>
       <section className="bg-white">
         <div className="grid grid-cols-1 lg:grid-cols-2">
+          {/* Seção de imagem */}
           <div className="relative flex items-end bg-gray-50 px-4 pb-10 pt-60 sm:px-6 sm:pb-16 md:justify-center lg:px-8 lg:pb-24">
             <div className="absolute inset-0">
               <img
@@ -59,36 +71,13 @@ const Register = () => {
             </div>
             <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
             <div className="relative">
-              <div className="w-full max-w-xl xl:mx-auto xl:w-full xl:max-w-xl xl:pr-24">
-                <h3 className="text-4xl font-bold text-white">
-                  Assista Gratuitamente, Apenas com Anúncios!
-                </h3>
-                <ul className="mt-10 grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">
-                  <li className="flex items-center space-x-3">
-                    <div className="inline-flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-blue-500">
-                      <svg
-                        className="h-3.5 w-3.5 text-white"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clipRule="evenodd"
-                        ></path>
-                      </svg>
-                    </div>
-                    <span className="text-lg font-medium text-white">
-                      Sem Burocracia
-                    </span>
-                  </li>
-                  {/* Outras vantagens */}
-                </ul>
-              </div>
+              <h3 className="text-4xl font-bold text-white">
+                Assista Gratuitamente, Apenas com Anúncios!
+              </h3>
             </div>
           </div>
 
+          {/* Seção de formulário */}
           <div className="flex items-center justify-center bg-white px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
             <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
               <h2 className="text-3xl font-bold leading-tight text-black sm:text-4xl">
@@ -97,9 +86,9 @@ const Register = () => {
               <p className="mt-2 text-base text-gray-600">
                 Já tem uma conta?{" "}
                 <a
-                  href="#"
-                  title=""
-                  className="font-medium text-blue-600 transition-all duration-200 hover:text-blue-700 hover:underline focus:text-blue-700"
+                  href="/login"
+                  title="Login"
+                  className="font-medium text-blue-600 hover:text-blue-700 hover:underline"
                 >
                   Entrar
                 </a>
@@ -110,7 +99,7 @@ const Register = () => {
                   <Input
                     label="Username"
                     type="text"
-                    name="Username"
+                    name="username"
                     onChange={(e) => setUsername(e.target.value)}
                     placeholder="Digite seu Username"
                   />
@@ -137,21 +126,18 @@ const Register = () => {
                   />
                 </div>
 
+                {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
+                {message && <p className="mt-2 text-base text-green-600">{message}</p>}
+
                 <div className="mt-8">
                   <button
                     type="submit"
-                    className="block w-full rounded-md border border-blue-600 bg-blue-600 py-4 text-center text-lg font-semibold text-white transition-all duration-200 hover:bg-blue-700 focus:bg-blue-700"
+                    className="block w-full rounded-md bg-blue-600 py-4 text-lg font-semibold text-white hover:bg-blue-700"
                   >
                     Criar sua conta
                   </button>
                 </div>
               </form>
-
-              {message && (
-                <p className="mt-4 text-center text-lg font-semibold text-gray-700">
-                  {message}
-                </p>
-              )}
             </div>
           </div>
         </div>

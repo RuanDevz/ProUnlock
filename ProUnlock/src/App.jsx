@@ -9,6 +9,8 @@ import AboutPage from "./pages/AboutPage";
 import ServicesPage from "./pages/ServicePage";
 import ContactPage from "./pages/ContactPage";
 import StreamingPage from "./pages/StreamingPage";
+import Profile from "./pages/Profile";
+import Settings from "./pages/Settings";
 
 const App = () => {
   return (
@@ -25,6 +27,11 @@ const App = () => {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/settings" element={<Settings />} />
+
+
+
         
         {/* Autenticação */}
         <Route path="/criarconta" element={<Register />} />

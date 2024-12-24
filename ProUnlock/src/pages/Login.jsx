@@ -11,36 +11,36 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
+  
     const userData = {
       email: email,
       password: password,
     };
-
+  
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/auth/login`,
         userData
       );
-
+  
       const { token, user } = response.data;
-      
+  
+      // Salva os dados no localStorage
       localStorage.setItem("token", token);
-
+      localStorage.setItem("user", JSON.stringify(user)); // Salva o usuário como string JSON
+  
       setToken(token);
       setUser(user);
-
+  
       console.log("Token:", token);
       console.log("User:", user);
-
-      window.location.href = '/'
-      
-
+  
+      window.location.href = "/";
     } catch (error) {
       console.error("Erro ao fazer login:", error);
+      alert("Erro ao fazer login. Verifique suas credenciais.");
     }
   };
-
   return (
     <div>
       <section className="bg-white">
