@@ -10,6 +10,7 @@ const platforms = [
   { name: "YouTube Premium", key: "youtube" },
   { name: "Paramount+", key: "paramount" },
   { name: "Apple TV+", key: "appletv" },
+  {name: "Canva", key: "canva"}
 ];
 
 const AdminPostPage = () => {
