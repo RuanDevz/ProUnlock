@@ -51,7 +51,7 @@ const Login = () => {
               <p className="mt-2 text-base text-gray-600">
                 Ainda não tem uma conta?{" "}
                 <a
-                  href="#"
+                  href="#/criarconta"
                   title=""
                   className="font-medium text-blue-600 transition-all duration-200 hover:text-blue-700 hover:underline focus:text-blue-700"
                 >

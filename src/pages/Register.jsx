@@ -42,11 +42,9 @@ const Register = () => {
 
       const { token, user } = response.data;
 
-      // Salva o token e dados do usuário no localStorage
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
 
-      // Redireciona o usuário para o dashboard ou página principal
       window.location.href = "/";
     } catch (error) {
       console.error("Erro ao registrar usuário:", error);
