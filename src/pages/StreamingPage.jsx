@@ -5,14 +5,15 @@ import { format } from "date-fns"; // Para formatar as datas
 import Netflix from "../assets/Netflix.png";
 import HBO from "../assets/HBO.png";
 import AmazonPrime from "../assets/AmazonPrime.png";
-import Star from "../assets/Star.png";
+import StarLogo from "../assets/Star.png"; // Renomeei aqui
 import Crunchyroll from "../assets/Cruchyroll.png";
 import Youtube from "../assets/Youtube.png";
 import Paramount from "../assets/Paramount.png";
 import AppleTV from "../assets/AppleTV.png"; 
 import Canva from "../assets/Canva.jpg"; 
+import Disney from '../assets/Disney.png'
+import ESPNlogo from '../assets/espn.png'
 
-import Banner from "../assets/Banner.png"; 
 
 const serviceDetails = {
   netflix: {
@@ -31,7 +32,7 @@ const serviceDetails = {
     text: "Assista a filmes, séries e muito mais com a Amazon Prime Video.",
   },
   starplus: {
-    logo: Star,
+    logo: StarLogo, // Usei StarLogo aqui
     color: "#F0C300", // Yellow for Star+
     text: "Descubra uma nova era de entretenimento com Star+.",
   },
@@ -60,6 +61,21 @@ const serviceDetails = {
     color: "#A8B800",
     text: "Crie designs incríveis com o Canva, sua ferramenta definitiva de criatividade!",
   },
+  disney: {
+    logo: Disney, 
+    color: "#004B87",  
+    text: "Assista a filmes e séries exclusivas da Disney, Pixar, Marvel, Star Wars e muito mais no Disney+!",
+  },
+  star: { // Renomeei a chave aqui para starplus
+    logo: StarLogo, 
+    color: "#E4002B",
+    text: "Assista a filmes e séries exclusivas, incluindo conteúdo da Fox, no Star+!",
+  },
+  espn: { // Renomeei a chave para 'espn'
+    logo: ESPNlogo, 
+    color: "#E4002B", // Cor para ESPN
+    text: "Acompanhe os melhores esportes ao vivo e on-demand com ESPN!",
+  }
 };
 
 const StreamingPage = () => {

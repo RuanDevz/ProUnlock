@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+
 const platforms = [
   { name: "Netflix", key: "netflix" },
   { name: "HBO", key: "hbo" },
   { name: "Amazon Prime", key: "amazonprime" },
-  { name: "Star+", key: "starplus" },
+  { name: "Star+", key: "star" },
   { name: "Crunchyroll", key: "crunchyroll" },
-  { name: "YouTube Premium", key: "youtube" },
   { name: "Paramount+", key: "paramount" },
   { name: "Apple TV+", key: "appletv" },
-  {name: "Canva", key: "canva"}
+  {name: "Canva", key: "canva"},
+  {name: "Disney+", key: "disney"},
+  {name: "ESPN", key: "espn"}
 ];
 
 const AdminPostPage = () => {
