@@ -10,6 +10,8 @@ import Crunchyroll from "../assets/Cruchyroll.png";
 import Youtube from "../assets/Youtube.png";
 import Paramount from "../assets/Paramount.png";
 import AppleTV from "../assets/AppleTV.png"; 
+import Canva from "../assets/Canva.jpg"; 
+
 import Banner from "../assets/Banner.png"; 
 
 const serviceDetails = {
@@ -52,6 +54,11 @@ const serviceDetails = {
     logo: AppleTV,
     color: "#A8B800", // Green for Apple TV+
     text: "Aproveite o melhor conteúdo exclusivo com Apple TV+.",
+  },
+  canva: {
+    logo: Canva,
+    color: "#A8B800",
+    text: "Crie designs incríveis com o Canva, sua ferramenta definitiva de criatividade!",
   },
 };
 

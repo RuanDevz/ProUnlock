@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Input from "../components/Input";
 import axios from "axios";
+import streamings from '../assets/streamings.jpg'
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -63,7 +64,7 @@ const Register = () => {
             <div className="absolute inset-0">
               <img
                 className="h-full w-full object-cover"
-                src="./src/assets/Register.jpg"
+                src={streamings}
                 alt="Registro"
               />
             </div>
@@ -84,7 +85,7 @@ const Register = () => {
               <p className="mt-2 text-base text-gray-600">
                 Já tem uma conta?{" "}
                 <a
-                  href="/login"
+                  href="#/entrar"
                   title="Login"
                   className="font-medium text-blue-600 hover:text-blue-700 hover:underline"
                 >

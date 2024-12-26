@@ -33,27 +33,37 @@ const App = () => {
   return (
     <AuthProvider>
       <Router>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Homepage />} />
-          <Route path="/streaming/:serviceName" element={<StreamingPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/services" element={<ServicesPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route
-            path="/admin"
-            element={
-              <ProtectedRoute adminOnly>
-                <AdminPostPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="/criarconta" element={<Register />} />
-          <Route path="/entrar" element={<Login />} />
-        </Routes>
-        <Footer />
+        {/* Layout principal */}
+        <div className="relative min-h-screen flex flex-col">
+          {/* Cabeçalho */}
+          <Header />
+
+          {/* Conteúdo principal */}
+          <main className="flex-grow pb-16">
+            <Routes>
+              <Route path="/" element={<Homepage />} />
+              <Route path="/streaming/:serviceName" element={<StreamingPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/services" element={<ServicesPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route
+                path="/admin"
+                element={
+                  <ProtectedRoute adminOnly>
+                    <AdminPostPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route path="/criarconta" element={<Register />} />
+              <Route path="/entrar" element={<Login />} />
+            </Routes>
+          </main>
+
+          {/* Rodapé fixo */}
+          <Footer className="absolute bottom-0 left-0 w-full" />
+        </div>
       </Router>
     </AuthProvider>
   );

@@ -8,9 +8,9 @@ import Crunchyroll from "../assets/Cruchyroll.png";
 import Youtube from "../assets/Youtube.png";
 import Paramount from "../assets/Paramount.png";
 import AppleTV from "../assets/AppleTV.png"; 
-import Banner from "../assets/Banner.png"; 
+import Banner from "../assets/Banner.png";
+import Canva from "../assets/Canva.jpg"; 
 import axios from 'axios'
-import FAQ from "./FAQ";
 
 const services = [
   { name: "Netflix", logo: Netflix, route: "/streaming/netflix" },
@@ -20,7 +20,8 @@ const services = [
   { name: "Crunchyroll", logo: Crunchyroll, route: "/streaming/crunchyroll" },
   { name: "YouTube Premium", logo: Youtube, route: "/streaming/youtube" },
   { name: "Paramount+", logo: Paramount, route: "/streaming/paramount" },
-  { name: "Apple TV+", logo: AppleTV, route: "/streaming/appletv" }, 
+  { name: "Apple TV+", logo: AppleTV, route: "/streaming/appletv" },
+  {name: "Canva", logo: Canva, route: "/streaming/canva"}
 ];
 
 const Pagination = () => {
