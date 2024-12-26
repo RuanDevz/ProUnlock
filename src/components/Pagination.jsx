@@ -60,7 +60,7 @@ const Pagination = () => {
                 href="mailto:prounlocksuporte@gmail.com"
                 className="text-blue-500 underline ml-1"
               >
-                prounlocksuporte@gmail.com
+                prounlocksuport@gmail.com
               </a>
             </p>
             <button
