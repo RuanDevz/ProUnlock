@@ -61,7 +61,6 @@ const App = () => {
             </Routes>
           </main>
 
-          {/* Rodapé fixo */}
           <Footer className="absolute bottom-0 left-0 w-full" />
         </div>
       </Router>
