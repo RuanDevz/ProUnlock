@@ -97,7 +97,7 @@ const Login = () => {
                         Senha
                       </label>
                       <a
-                        href="#"
+                        href="#/forgotpassword"
                         title=""
                         className="text-sm font-medium text-blue-600 hover:text-blue-700 hover:underline focus:text-blue-700"
                       >

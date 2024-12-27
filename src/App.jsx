@@ -13,6 +13,8 @@ import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
 import AdminPostPage from "./pages/AdminPostPage";
 import { AuthProvider, useAuth } from "../context/Authprovider";
+import ForgotPassword from "./pages/Forgotpassword";
+import ResetPassword from "./pages/Resetpassword";
 
 // Componente para proteger rotas
 const ProtectedRoute = ({ children, adminOnly }) => {
@@ -58,6 +60,9 @@ const App = () => {
               />
               <Route path="/criarconta" element={<Register />} />
               <Route path="/entrar" element={<Login />} />
+              <Route path="/forgotpassword" element={<ForgotPassword />} />
+              <Route path="/resetpassword" element={<ResetPassword />} />
+
             </Routes>
           </main>
 
