@@ -7,12 +7,12 @@ import Star from "../assets/Star.png";
 import Crunchyroll from "../assets/Cruchyroll.png";
 import Paramount from "../assets/Paramount.png";
 import AppleTV from "../assets/AppleTV.png";
-import Banner from "../assets/Banner.png";
 import Canva from "../assets/Canva.jpg";
 import Disney from "../assets/Disney.png";
 import ESPN from "../assets/espn.png";
+import UFC from '../assets/UFC.png'
 import axios from "axios";
-import CarouselSection from "./CarouselSection";
+
 
 const services = [
   { name: "Netflix", logo: Netflix, route: "/streaming/netflix" },
@@ -25,10 +25,13 @@ const services = [
   { name: "Disney+", logo: Disney, route: "/streaming/disney" },
   { name: "Star+", logo: Star, route: "/streaming/star" },
   { name: "ESPN", logo: ESPN, route: "/streaming/espn" },
+  { name: "UFC", logo: UFC, route: "/streaming/ufc" },
 ];
 
 const Pagination = () => {
   const navigate = useNavigate();
+  const [userData, setUserData] = useState(null); // Dados do usuário
+  const [loading, setLoading] = useState(true); // Indicador de carregamento
   const [showPopup, setShowPopup] = useState(false);
 
   const handleServiceClick = (service) => {
@@ -37,28 +40,49 @@ const Pagination = () => {
 
   const handleClosePopup = () => {
     setShowPopup(false);
-    // Armazena no localStorage que o popup foi fechado
     localStorage.setItem("popupClosed", "true");
   };
 
   useEffect(() => {
-    // Verifica se o popup já foi fechado (se a chave estiver presente no localStorage)
-    const popupClosed = localStorage.getItem("popupClosed");
+    const fetchUserData = async () => {
+      try {
+        const token = localStorage.getItem("token"); // Obter token do localStorage
+        if (!token) {
+          navigate("/login"); // Redireciona para login se o token não estiver presente
+          return;
+        }
 
-    if (!popupClosed) {
-      setShowPopup(true); // Exibe o popup se não estiver fechado
-    }
+        const response = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/auth/dashboard`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
 
-    // Requisição de exemplo
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/api/streaming/netflix`)
-      .then((response) => {
-        console.log(response.data);
-      });
+        
+
+        setUserData(response.data);
+      } catch (error) {
+        console.error("Erro ao buscar os dados do usuário:", error);
+        navigate("/login"); 
+      } finally {
+        setLoading(false); // Remove o indicador de carregamento
+      }
+    };
+
+    fetchUserData();
   }, []);
 
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <p>Carregando...</p>
+      </div>
+    );
+  }
+
   return (
-    <div className="flex flex-col items-center justify-center bg-gray-700 p-8 font-sans pb-20">
+    <div className="flex flex-col items-center justify-center bg-gray-700 p-8 font-sans pb-40">
       {showPopup && (
         <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white p-6 rounded shadow-md text-center max-w-sm">
@@ -70,7 +94,7 @@ const Pagination = () => {
                 href="mailto:prounlocksuporte@gmail.com"
                 className="text-blue-500 underline ml-1"
               >
-                prounlocksuport@gmail.com
+                prounlocksuporte@gmail.com
               </a>
             </p>
             <button
@@ -83,9 +107,23 @@ const Pagination = () => {
         </div>
       )}
 
-      <div className="w-full max-w-screen-xl">
-        {/* <CarouselSection /> */}
-      </div>
+<div className="w-full max-w-screen-xl flex justify-center items-center flex-col bg-gray-800 p-6 rounded-lg shadow-md">
+  <h1 className="text-4xl font-bold text-indigo-400 mb-4">
+    Bem-vindo, {userData?.username || "Usuário"}!
+  </h1>
+  <p className="text-lg text-white mb-2">
+    <span className="font-semibold">Status:</span>{" "}
+    <span className={`px-2 py-1 rounded ${userData.isVip ? "bg-green-500 text-white" : "bg-red-500 text-white"}`}>
+      {userData.isVip ? "VIP" : "Usuário Comum"}
+    </span>
+  </p>
+  {userData.isAdmin && (
+    <p className="text-lg font-medium text-yellow-400">
+      <i className="fas fa-shield-alt mr-2"></i> Administrador
+    </p>
+  )}
+</div>
+
 
       <div id="servicos" className="mt-12 w-full max-w-screen-xl px-4">
         <h2 className="mb-8 text-center text-3xl font-bold text-white">

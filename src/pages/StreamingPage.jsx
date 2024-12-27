@@ -13,6 +13,7 @@ import AppleTV from "../assets/AppleTV.png";
 import Canva from "../assets/Canva.jpg"; 
 import Disney from '../assets/Disney.png'
 import ESPNlogo from '../assets/espn.png'
+import UFC from '../assets/UFC.png'
 
 
 const serviceDetails = {
@@ -75,6 +76,11 @@ const serviceDetails = {
     logo: ESPNlogo, 
     color: "#E4002B", // Cor para ESPN
     text: "Acompanhe os melhores esportes ao vivo e on-demand com ESPN!",
+  },
+  ufc: {
+    logo: UFC,
+    color: "#E4002B",
+    text: "Acompanhe os maiores eventos do UFC ao vivo e com análises exclusivas!",
   }
 };
 

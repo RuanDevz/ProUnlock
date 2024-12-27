@@ -8,7 +8,7 @@ const AboutPage = () => {
           Sobre o ProUnlock
         </h2>
         <p className="text-center text-lg text-gray-700 mb-6">
-          O ProUnlock é uma plataforma que oferece links exclusivos para acessar conteúdos premium de forma fácil e segura. Nosso objetivo é proporcionar aos usuários o acesso a plataformas pagas como Netflix, HBO, Spotify e outros serviços de streaming e conteúdo online, de maneira simples e acessível.
+          O ProUnlock é uma plataforma que oferece links exclusivos para acessar conteúdos premium de forma fácil e segura. Nosso objetivo é proporcionar aos usuários o acesso a plataformas pagas como Netflix, HBO, Disney+ e outros serviços de streaming e conteúdo online, de maneira simples e acessível.
         </p>
         
         <h3 className="text-2xl font-semibold text-indigo-600 mb-4">Nossa Missão</h3>

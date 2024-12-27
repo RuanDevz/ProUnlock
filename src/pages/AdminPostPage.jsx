@@ -12,7 +12,8 @@ const platforms = [
   { name: "Apple TV+", key: "appletv" },
   {name: "Canva", key: "canva"},
   {name: "Disney+", key: "disney"},
-  {name: "ESPN", key: "espn"}
+  {name: "ESPN", key: "espn"},
+  {name: "UFC", key: "ufc"}
 ];
 
 const AdminPostPage = () => {

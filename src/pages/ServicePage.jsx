@@ -8,7 +8,7 @@ const ServicesPage = () => {
           Nossos Serviços
         </h2>
         <p className="text-center text-lg text-gray-700 mb-6">
-          No ProUnlock, oferecemos uma ampla gama de links exclusivos e atualizados regularmente para que você tenha sempre acesso aos melhores conteúdos pagos. Nosso serviço é focado em oferecer links verificados, atualizados semanalmente, para plataformas de streaming, jogos e outros conteúdos premium.
+          No ProUnlock, oferecemos uma ampla gama de links exclusivos e atualizados regularmente para que você tenha sempre acesso aos melhores conteúdos pagos. Nosso serviço é focado em oferecer links verificados, atualizados semanalmente, para plataformas de streaming e outros conteúdos premium.
         </p>
         
         <h3 className="text-2xl font-semibold text-indigo-600 mb-4">Links Atualizados Semanalmente</h3>
@@ -23,7 +23,7 @@ const ServicesPage = () => {
 
         <h3 className="text-2xl font-semibold text-indigo-600 mb-4">Variedade de Plataformas</h3>
         <p className="text-center text-lg text-gray-700 mb-6">
-          Oferecemos links para uma variedade de plataformas, incluindo serviços de streaming como Netflix, HBO, Spotify, e muito mais. Além disso, também disponibilizamos links para conteúdos exclusivos de jogos, filmes e outros serviços pagos.
+          Oferecemos links para uma variedade de plataformas, incluindo serviços de streaming como Netflix, HBO, Paramount+, e muito mais. Além disso, também disponibilizamos links para conteúdos exclusivos de jogos, filmes e outros serviços pagos.
         </p>
         
         <h3 className="text-2xl font-semibold text-indigo-600 mb-4">Suporte ao Cliente</h3>

@@ -15,6 +15,7 @@ import AdminPostPage from "./pages/AdminPostPage";
 import { AuthProvider, useAuth } from "../context/Authprovider";
 import ForgotPassword from "./pages/Forgotpassword";
 import ResetPassword from "./pages/Resetpassword";
+import Insights from "./pages/Insights";
 
 // Componente para proteger rotas
 const ProtectedRoute = ({ children, adminOnly }) => {
@@ -41,7 +42,7 @@ const App = () => {
           <Header />
 
           {/* Conteúdo principal */}
-          <main className="flex-grow pb-16">
+          <main className="flex-grow">
             <Routes>
               <Route path="/" element={<Homepage />} />
               <Route path="/streaming/:serviceName" element={<StreamingPage />} />
@@ -50,14 +51,10 @@ const App = () => {
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/settings" element={<Settings />} />
-              <Route
-                path="/admin"
-                element={
-                  <ProtectedRoute adminOnly>
-                    <AdminPostPage />
-                  </ProtectedRoute>
-                }
-              />
+              <Route path="admin/insights" element={<Insights />} />
+              <Route path="/admin" element={<AdminPostPage />} />
+
+              
               <Route path="/criarconta" element={<Register />} />
               <Route path="/entrar" element={<Login />} />
               <Route path="/forgotpassword" element={<ForgotPassword />} />
