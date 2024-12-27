@@ -29,7 +29,7 @@ const services = [
 
 const Pagination = () => {
   const navigate = useNavigate();
-  const [showPopup, setShowPopup] = useState(true);
+  const [showPopup, setShowPopup] = useState(false);
 
   const handleServiceClick = (service) => {
     navigate(service.route);
@@ -37,9 +37,19 @@ const Pagination = () => {
 
   const handleClosePopup = () => {
     setShowPopup(false);
+    // Armazena no localStorage que o popup foi fechado
+    localStorage.setItem("popupClosed", "true");
   };
 
   useEffect(() => {
+    // Verifica se o popup já foi fechado (se a chave estiver presente no localStorage)
+    const popupClosed = localStorage.getItem("popupClosed");
+
+    if (!popupClosed) {
+      setShowPopup(true); // Exibe o popup se não estiver fechado
+    }
+
+    // Requisição de exemplo
     axios
       .get(`${import.meta.env.VITE_BACKEND_URL}/api/streaming/netflix`)
       .then((response) => {
@@ -75,7 +85,6 @@ const Pagination = () => {
 
       <div className="w-full max-w-screen-xl">
         {/* <CarouselSection /> */}
-        
       </div>
 
       <div id="servicos" className="mt-12 w-full max-w-screen-xl px-4">
