@@ -61,7 +61,6 @@ const Profile = () => {
           </div>
         </div>
 
-        {/* Botão de Ações */}
         <div className="p-6 border-t bg-gray-50">
           <button
             className="w-full rounded-lg bg-blue-600 py-3 text-white font-semibold hover:bg-blue-700"
