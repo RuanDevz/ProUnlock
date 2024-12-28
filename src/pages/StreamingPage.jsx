@@ -153,31 +153,35 @@ const StreamingPage = () => {
         </div>
 
         {isLoading ? (
-          <p className="text-center text-gray-500">Carregando...</p>
-        ) : errorMessage ? (
-          <p className="text-center text-red-500 font-semibold mt-4">{errorMessage}</p>
-        ) : (
-          Array.isArray(serviceLinks) && serviceLinks.length > 0 ? (
-            serviceLinks.map((link) => (
-              <div key={link.id} className="mb-6">
-                {/* Exibir a data formatada */}
-                <p className="text-center text-gray-500 text-sm">
-                  {format(new Date(link.postDate), "dd/MM/yyyy")}
-                </p>
-                <a
-                  href={link.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block text-blue-500 underline transition-colors hover:text-blue-700 mt-2 text-xl"
-                >
-                  {link.name}
-                </a>
-              </div>
-            ))
-          ) : (
-            <p className="text-center text-red-500">Sem links disponíveis</p>
-          )
-        )}
+  <p className="text-center text-gray-500">Carregando...</p>
+) : errorMessage ? (
+  <p className="text-center text-red-500 font-semibold mt-4">{errorMessage}</p>
+) : (
+  Array.isArray(serviceLinks) && serviceLinks.length > 0 ? (
+    serviceLinks.map((link) => (
+      <div key={link.id} className="mb-6">
+        {/* Exibir a data formatada */}
+        <p className="text-center text-gray-500 text-sm">
+          {format(new Date(link.postDate), "dd/MM/yyyy")}
+        </p>
+        <a
+          href={link.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => {
+            // Abrir o link adicional
+            window.open("https://whomeenoaglauns.com/4/8712087", "_blank");
+          }}
+          className="block text-blue-500 underline transition-colors hover:text-blue-700 mt-2 text-xl"
+        >
+          {link.name}
+        </a>
+      </div>
+    ))
+  ) : (
+    <p className="text-center text-red-500">Sem links disponíveis</p>
+  )
+)}
       </div>
     </div>
   );
