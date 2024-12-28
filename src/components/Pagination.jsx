@@ -13,7 +13,6 @@ import ESPN from "../assets/espn.png";
 import UFC from '../assets/UFC.png'
 import axios from "axios";
 
-
 const services = [
   { name: "Netflix", logo: Netflix, route: "/streaming/netflix" },
   { name: "HBO", logo: HBO, route: "/streaming/hbo" },
@@ -43,43 +42,6 @@ const Pagination = () => {
     localStorage.setItem("popupClosed", "true");
   };
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const token = localStorage.getItem("token"); // Obter token do localStorage
-        if (!token) {
-          navigate("/login"); // Redireciona para login se o token não estiver presente
-          return;
-        }
-
-        const response = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/auth/dashboard`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
-
-        
-
-        setUserData(response.data);
-      } catch (error) {
-        console.error("Erro ao buscar os dados do usuário:", error);
-        navigate("/login"); 
-      } finally {
-        setLoading(false); // Remove o indicador de carregamento
-      }
-    };
-
-    fetchUserData();
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <p>Carregando...</p>
-      </div>
-    );
-  }
 
   return (
     <div className="flex flex-col items-center justify-center bg-gray-700 p-8 font-sans pb-40">
@@ -107,23 +69,28 @@ const Pagination = () => {
         </div>
       )}
 
-<div className="w-full max-w-screen-xl flex justify-center items-center flex-col bg-gray-800 p-6 rounded-lg shadow-md">
-  <h1 className="text-4xl font-bold text-indigo-400 mb-4">
-    Bem-vindo, {userData?.username || "Usuário"}!
-  </h1>
-  <p className="text-lg text-white mb-2">
-    <span className="font-semibold">Status:</span>{" "}
-    <span className={`px-2 py-1 rounded ${userData.isVip ? "bg-green-500 text-white" : "bg-red-500 text-white"}`}>
-      {userData.isVip ? "VIP" : "Usuário Comum"}
-    </span>
-  </p>
-  {userData.isAdmin && (
-    <p className="text-lg font-medium text-yellow-400">
-      <i className="fas fa-shield-alt mr-2"></i> Administrador
-    </p>
-  )}
-</div>
-
+      {userData && (
+        <div className="w-full max-w-screen-xl flex justify-center items-center flex-col bg-gray-800 p-6 rounded-lg shadow-md">
+          <h1 className="text-4xl font-bold text-indigo-400 mb-4">
+            Bem-vindo, {userData?.username || "Usuário"}!
+          </h1>
+          <p className="text-lg text-white mb-2">
+            <span className="font-semibold">Status:</span>{" "}
+            <span
+              className={`px-2 py-1 rounded ${
+                userData.isVip ? "bg-green-500 text-white" : "bg-red-500 text-white"
+              }`}
+            >
+              {userData.isVip ? "VIP" : "Usuário Comum"}
+            </span>
+          </p>
+          {userData.isAdmin && (
+            <p className="text-lg font-medium text-yellow-400">
+              <i className="fas fa-shield-alt mr-2"></i> Administrador
+            </p>
+          )}
+        </div>
+      )}
 
       <div id="servicos" className="mt-12 w-full max-w-screen-xl px-4">
         <h2 className="mb-8 text-center text-3xl font-bold text-white">

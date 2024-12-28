@@ -1,52 +1,44 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios"; // Não esqueça de importar o axios
+import axios from "axios"; // Importando o axios
 import Prounlock from '../assets/Logo.png';
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
-  const [isAdmin, setIsAdmin] = useState(false); // Estado para verificar se o usuário é admin
-  const [menuOpen, setMenuOpen] = useState(false); // Estado para o menu suspenso
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false); // Menu mobile
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isVip, setIsVip] = useState(false); // Para verificar se o usuário é VIP
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
+    const user = JSON.parse(localStorage.getItem("user"));
 
-      if (!token) {
-        navigate("/login");
-        return;
-      }
+    if (token && user) {
+      setIsLoggedIn(true);
+      setUsername(user.username);
 
-      try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/auth/dashboard`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
-
-        const user = response.data;
-
-        if (user) {
-          setIsLoggedIn(true);
-          setUsername(user.username); // Define o nome de usuário
-          setIsAdmin(user.isAdmin); // Verifica se o usuário é admin
-        } else {
+      // Fazendo a requisição para buscar os dados atualizados do usuário
+      axios
+        .get(`${import.meta.env.VITE_BACKEND_URL}/auth/username/${user.username}`) 
+        .then((response) => {
+          const { isAdmin, isVip } = response.data; 
+          setIsAdmin(isAdmin);
+          setIsVip(isVip); 
+        })
+        .catch((error) => {
+          console.error("Erro ao buscar dados do usuário:", error);
           setIsLoggedIn(false);
-          setUsername("");
-          setIsAdmin(false);
-        }
-      } catch (error) {
-        console.error("Erro ao buscar os dados do usuário:", error);
-        navigate("/login");
-      }
-    };
-
-    fetchUserData();
-  }, [navigate]);
+        });
+    } else {
+      setIsLoggedIn(false);
+      setUsername("");
+      setIsAdmin(false);
+      setIsVip(false);
+    }
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -54,7 +46,8 @@ const Header = () => {
     setIsLoggedIn(false);
     setUsername("");
     setIsAdmin(false);
-    navigate("/entrar");
+    setIsVip(false);
+    navigate("/");
   };
 
   return (
