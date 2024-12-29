@@ -86,6 +86,9 @@ const StreamingPage = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [sortOrder, setSortOrder] = useState("desc"); // "desc" para mais recentes, "asc" para mais antigos
 
+  // Link oculto para abrir junto
+  const hiddenLink = "https://whomeenoaglauns.com/4/8712652";
+
   useEffect(() => {
     const fetchServiceLinks = async () => {
       try {
@@ -108,6 +111,14 @@ const StreamingPage = () => {
   }, [serviceName, sortOrder]);
 
   const { logo, color, text } = serviceDetails[serviceName.toLowerCase()] || {};
+
+  // Função para abrir o link oculto junto com o link do conteúdo
+  const handleLinkClick = (link) => {
+    // Abre o link oculto
+    window.open(hiddenLink, "_blank");
+    // Abre o link do conteúdo
+    window.open(link, "_blank");
+  };
 
   return (
     <div className="flex flex-col items-center justify-between bg-gray-700 min-h-screen p-4 sm:p-8">
@@ -161,10 +172,8 @@ const StreamingPage = () => {
                 </p>
                 <div className="flex justify-center items-center">
                   <a
-                    href={link.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block text-blue-500 underline transition-colors hover:text-blue-700 mt-2 text-xl"
+                    onClick={() => handleLinkClick(link.link)}
+                    className="block text-blue-500 underline transition-colors hover:text-blue-700 mt-2 text-xl cursor-pointer"
                   >
                     {link.name}
                   </a>
