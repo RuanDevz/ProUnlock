@@ -155,18 +155,22 @@ const StreamingPage = () => {
           Array.isArray(serviceLinks) && serviceLinks.length > 0 ? (
             serviceLinks.map((link) => (
               <div key={link.id} className="mb-6">
-                {/* Exibir a data formatada */}
-                <p className="text-center text-gray-500 text-sm">
+                {/* Exibir a data formatada com aumento no tamanho e font-bold */}
+                <p className="text-center text-black text-lg font-bold">
                   {format(new Date(link.postDate), "dd/MM/yyyy")}
                 </p>
-                <a
-                  href={link.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block text-blue-500 underline transition-colors hover:text-blue-700 mt-2 text-xl"
-                >
-                  {link.name}
-                </a>
+                <div className="flex justify-center items-center">
+                  <a
+                    href={link.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-blue-500 underline transition-colors hover:text-blue-700 mt-2 text-xl"
+                  >
+                    {link.name}
+                  </a>
+                  {/* Mensagem piscando */}
+                  <span className="text-red-500 ml-4 mt-1 animate-pulse">NOVO!</span>
+                </div>
               </div>
             ))
           ) : (
