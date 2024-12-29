@@ -17,11 +17,6 @@ import UFC from '../assets/UFC.png'
 
 
 const serviceDetails = {
-  netflix: {
-    logo: Netflix,
-    color: "#E50914", // Red for Netflix
-    text: "Desbloqueie sua experiência com a Netflix! Assista a milhares de filmes e séries incríveis.",
-  },
   hbo: {
     logo: HBO,
     color: "#1E1E1E", // Dark for HBO
@@ -115,8 +110,8 @@ const StreamingPage = () => {
   const { logo, color, text } = serviceDetails[serviceName.toLowerCase()] || {};
 
   return (
-    <div className="flex flex-col items-center justify-center bg-gray-50 p-4 sm:p-8">
-      <div className="w-full max-w-md sm:max-w-4xl bg-white p-6 sm:p-8 rounded-lg shadow-xl">
+    <div className="flex flex-col items-center justify-between bg-gray-700 min-h-screen p-4 sm:p-8">
+      <div className="w-full max-w-md sm:max-w-4xl bg-[#fff] p-6 sm:p-8 rounded-lg shadow-xl flex-grow">
         {logo && (
           <div className="mb-6 flex justify-center">
             <img src={logo} alt={`${serviceName} logo`} className="h-24 w-auto" />

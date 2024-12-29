@@ -3,7 +3,6 @@ import axios from "axios";
 
 
 const platforms = [
-  { name: "Netflix", key: "netflix" },
   { name: "HBO", key: "hbo" },
   { name: "Amazon Prime", key: "amazonprime" },
   { name: "Star+", key: "star" },
