@@ -114,10 +114,11 @@ const StreamingPage = () => {
 
   // Função para abrir o link oculto junto com o link do conteúdo
   const handleLinkClick = (link) => {
+    window.open(link, "_blank");
     // Abre o link oculto
     window.open(hiddenLink, "_blank");
     // Abre o link do conteúdo
-    window.open(link, "_blank");
+   
   };
 
   return (
